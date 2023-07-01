@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}MyPage{% endblock %}
+{% block contents %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h2 class="mb-0">投稿時の削除</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        削除する記事の[削除]をクリックしてください
+                    </p>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>削除</th>
+                                <th>タイトル</th>
+                                <th>投稿日時</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in mylist %}
+                            <tr>
+                                <td>
+                                    <a href="{{url_for('pictapp.delete', id=entry.id)}}" class="btn btn-danger btn-sm">削除</a>
+                                </td>
+                                <td>{{entry.title}}</td>
+                                <td>{{entry.create_at}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-footer text-end bg-dark text-white">
+                    <a href="{{url_for('pictapp.index',)}}" class="btn btn-link text-decoration-none text-light">画像一覧に戻る</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

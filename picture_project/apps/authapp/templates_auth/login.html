@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Log in</title>
+
+    <link rel="stylesheet" href="{{url_for('authapp.static', filename='xss/bootstrap.min.css')}}">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      body {
+        background: url("../assets/img/bg-login.jpg") no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+
+      .form-signin {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 20px;
+      }
+
+      .form-signin input {
+        margin-bottom: 10px;
+        border-radius: 10px;
+      }
+
+      .form-signin input[type="submit"] {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: #ffffff;
+        font-size: 1.1em;
+        font-weight: bold;
+        padding: 10px;
+      }
+    </style>
+
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('authapp.static', filename='css/signin.css')}}" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+    <main class="form-signin">
+      <form action="{{url_for('authapp.index')}}"
+            method="POST"
+            novalidate="novalidate">
+
+        <img class="mb-4"
+            src="{{url_for('authapp.static', filename='img/bootstrap-logo.svg')}}"
+            alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+
+        {% for message in get_flashed_messages() %}
+        <p style="color:red">{{ message }}</p>
+        <br>
+        {% endfor %}
+
+        {% for error in form.email.errors %}
+        <span style="color:red">{{ error }}</span>
+        <br>
+        {% endfor %}
+        {% for error in form.password.errors %}
+        <span style="color:red">{{ error }}</span>
+        <br>
+        {% endfor %}
+
+        {{form.csrf_token}}
+        <p>
+          {{form.email.label}}
+          {{form.email(placdholder="メールアドレス")}}
+        </p>
+        <p>
+          {{form.password.label}}
+          {{form.password(placeholder="パスワード")}}
+        </p>
+        <p>
+          {{form.submit()}}
+        </p>
+      </form>
+    </main>
+    
+  </body>
+</html>

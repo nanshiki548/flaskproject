@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{% block title %}Detail{% endblock %}
+
+{% block contents %}
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm2 row-cols-md3 g-3">
+            <div>
+                <h3>{{ detail.title }}</h3>
+                <h4>{{detail.comments}}</h4>
+                <img 
+                src="{{url_for('pictapp.image_file', filename=detail.image_path)}}" 
+                alt="{{detail.title or ''}}">
+            </div>
+        </div>
+        <p>create_at:{{detail.create_at}}</p>
+        <a href="{{url_for('pictapp.index')}}">画像一覧へ戻る</a>
+    </div>
+</div>
+
+{% endblock %}

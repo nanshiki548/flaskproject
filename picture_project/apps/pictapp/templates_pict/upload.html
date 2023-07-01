@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Upload{% endblock %}
+
+{% block contents %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">画像アップロード</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        タイトルと本文を入力、画像を選択して[アップロード]をクリックしてください。
+                    </p>
+                    <form 
+                        action="{{url_for('pictapp.upload')}}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        novalidate="novalidate">
+
+                        {{form.csrf_token}}
+                        <div class="mb-3">
+                            {{form.title.label(class="form-label")}}
+                            {{form.title(class="form-control", placeholder="タイトル")}}
+                            {% for error in form.title.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            {{form.message.label(class="form-label")}}
+                            {{form.message(class="form-control", placeholder="メッセージ")}}
+                            {% for error in form.message.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            {{form.image(class="form-control")}}
+                            {% for error in form.image.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <hr>
+                        <div class="mb-3">
+                            {{form.submit(class="btn btn-primary")}}
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-end">
+                    <a href="{{url_for('pictapp.index')}}" class="btn btn-link">投稿をやめる</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

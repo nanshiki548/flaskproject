@@ -1,0 +1,52 @@
+<!--ベーステンプレートを適用する-->
+{% extends 'base.html' %}
+
+<!--ヘッダー情報のページタイトルはベースてプレートを利用するページで設定する-->
+{% block title %}FlaskBlog{% endblock %}
+
+        <!-- Page Header-->
+        {%block header%}
+        <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Flask Flask</h1>
+                            <span class="subheading">まつだたつや</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% endblock %}
+        <!-- Main Content-->
+        {% block contents %}
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    {% for entry in rows %}
+                    <!-- Post preview-->
+                    <div class="post-preview">
+                        <a href="{{url_for('show_entry', id=entry.id)}}">
+                            <h2 class="post-title">{{entry.title}}</h2>
+                            <h5 class="post-subtitle">{{entry.contents|truncate(80)}}</h5>
+                        </a>
+                        <p class="post-meta">
+                            <a href="#">Flask Flask</a>
+                            {{entry.reate_at}}に投稿
+                        </p>
+                    </div>
+                    <hr class="my-4" />
+                    {% endfor %}
+
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4">
+                        {{ pagination.info }}
+                    </div>
+                    <div class="d-flex justify-content-end mb-4">
+                        {{ pagination.links }}
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        <!--フッダー以下はベーステンプレートを適用する-->
